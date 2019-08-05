@@ -1,0 +1,117 @@
+{
+	"basePath": "/",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"ILakeModel": {
+			"properties": {
+				"id": {
+					"type": "string",
+					"x-nullable": true
+				},
+				"name": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"salmon": {
+					"type": "number",
+					"format": "double"
+				},
+				"tuna": {
+					"type": "number",
+					"format": "double"
+				}
+			},
+			"required": [
+				"name",
+				"type",
+				"salmon",
+				"tuna"
+			],
+			"type": "object"
+		},
+		"ILakeViewModel": {
+			"properties": {
+				"fishType": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"fishType"
+			],
+			"type": "object"
+		}
+	},
+	"info": {
+		"title": "lakeapi",
+		"version": "1.0.0",
+		"description": "A Node.js RESTful API Project",
+		"license": {
+			"name": "ISC"
+		}
+	},
+	"paths": {
+		"/lakes": {
+			"get": {
+				"operationId": "GetLakes",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ILakeModel"
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/lakes/{type}": {
+			"put": {
+				"operationId": "UpdateLake",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "type",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "requestBody",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/ILakeViewModel"
+						}
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {}
+}
