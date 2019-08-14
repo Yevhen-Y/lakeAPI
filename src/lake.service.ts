@@ -18,12 +18,12 @@ export class LakeService {
 
     public async update(type: string, @Body() requestBody: ILakeViewModel): Promise<{ error: string, result: string }> {
         let errorMessage = '';
-        await LakeModel.findOne({ type: type }).then((res) => {
+        await LakeModel.findOne({ type: type }).then(async (res) => {
             const fishByType = res[requestBody.fishType];
             if (fishByType) {
                 if (fishByType > 0) {
                     res[requestBody.fishType]--;
-                    LakeModel.updateOne({ type: type }, res);
+                    await LakeModel.updateOne({ type: type }, res);
                 } else {
                     errorMessage = `No ${requestBody.fishType} in the ${type} lake`;
                 }
