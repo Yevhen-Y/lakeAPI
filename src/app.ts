@@ -5,11 +5,16 @@ import * as bodyparser from 'body-parser';
 import { requestLoggerMiddleware } from './request.logger.middleware';
 import './lake.controller';
 
-import { RegisterRoutes} from './routes'
-import * as swaggerUi from 'swagger-ui-express'
+import { RegisterRoutes} from './routes';
+import * as swaggerUi from 'swagger-ui-express';
 
+
+const corsOptions = {
+    origin: 'http://localhost:4200',
+    credentials: true,
+};
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyparser.json());
 
 app.use(requestLoggerMiddleware);

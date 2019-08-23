@@ -3,8 +3,13 @@ import { LakeModel } from './models/lake.schema';
 import { Body } from 'tsoa';
 import { ILakeModel } from './models/lake.interface';
 import { ILakeViewModel } from './models/lake.view-model';
+import { SocketConnection } from './socket-connection';
+
 
 export class LakeService {
+
+    public constructor(){}
+      
 
     public async getAll(): Promise<ILakeModel[]> {
         try {
@@ -23,7 +28,12 @@ export class LakeService {
             if (fishByType) {
                 if (fishByType > 0) {
                     res[requestBody.fishType]--;
-                    await LakeModel.updateOne({ type: type }, res);
+                    await LakeModel.updateOne({ type: type }, res).then(() => {
+                        const response = {fishType: requestBody.fishType,
+                                        res: res  }
+                        SocketConnection.getSocket().socket.emit('data', response);
+
+                    })
                 } else {
                     errorMessage = `No ${requestBody.fishType} in the ${type} lake`;
                 }
