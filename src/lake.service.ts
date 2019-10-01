@@ -26,6 +26,7 @@ export class LakeService {
             if (fishByType) {
                 if (fishByType > 0) {
                     res[requestBody.fishType]--;
+<<<<<<< HEAD
                     await LakeModel.updateOne({ type: type }, res).then(() => {
                         const response = {
                             fishType: requestBody.fishType,
@@ -34,6 +35,10 @@ export class LakeService {
                         SocketConnection.getSocket().socket.emit('data', response);
 
                     })
+=======
+                   await LakeModel.updateOne({ type: type },  {$set: res});
+                    
+>>>>>>> 4250af34c19b9ca4b0aa5118f2b9b5ba4e214c08
                 } else {
                     errorMessage = `No ${requestBody.fishType} in the ${type} lake`;
                 }

@@ -94,12 +94,14 @@
 					{
 						"in": "path",
 						"name": "type",
+						"description": "Type of lake that need to be updated",
 						"required": true,
 						"type": "string"
 					},
 					{
 						"in": "body",
 						"name": "requestBody",
+						"description": "Type of fish that need to be updated",
 						"required": true,
 						"schema": {
 							"$ref": "#/definitions/ILakeViewModel"
