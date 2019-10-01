@@ -3,6 +3,8 @@ import * as http from 'http';
 import { MongoHelper } from './mongo.helper';
 import * as mongoose from 'mongoose';
 import { SocketConnection } from './socket-connection';
+import { LakeService } from './lake.service';
+import { checkServerIdentity } from 'tls';
 
 const PORT = 8081;
 const MONGO_URI = 'mongodb://localhost:27017/lakedb';
@@ -20,6 +22,8 @@ server.on('listening', async () => {
         console.error(err);
     } )
 });
+
+
 
 SocketConnection.Server = server;
 

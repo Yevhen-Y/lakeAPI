@@ -6,10 +6,8 @@ import { ILakeViewModel } from './models/lake.view-model';
 import { SocketConnection } from './socket-connection';
 
 
-export class LakeService {
 
-    public constructor(){}
-      
+export class LakeService {
 
     public async getAll(): Promise<ILakeModel[]> {
         try {
@@ -29,8 +27,10 @@ export class LakeService {
                 if (fishByType > 0) {
                     res[requestBody.fishType]--;
                     await LakeModel.updateOne({ type: type }, res).then(() => {
-                        const response = {fishType: requestBody.fishType,
-                                        res: res  }
+                        const response = {
+                            fishType: requestBody.fishType,
+                            res: res
+                        }
                         SocketConnection.getSocket().socket.emit('data', response);
 
                     })
@@ -47,4 +47,5 @@ export class LakeService {
             return { error: null, result: `You've got 1 ${requestBody.fishType}` };
         }
     };
+
 }

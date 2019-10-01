@@ -3,10 +3,12 @@ import { Controller, Route, Get, Body, Put} from 'tsoa';
 import { ILakeModel } from './models/lake.interface';
 import { LakeService } from './lake.service'
 import { ILakeViewModel } from './models/lake.view-model';
+import { RabbitMQ } from './rabbit-receive';
 
 
 @Route('/lakes')
 export class LakeController extends Controller {
+    
 
     @Get('/')
     public async getLakes(): Promise<ILakeModel[]> {

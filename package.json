@@ -15,7 +15,9 @@
   "author": "Yevhen Y",
   "license": "ISC",
   "dependencies": {
+    "@types/amqplib": "^0.5.13",
     "@types/socket.io": "^2.1.2",
+    "amqplib": "^0.5.5",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

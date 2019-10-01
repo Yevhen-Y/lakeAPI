@@ -7,6 +7,8 @@ import './lake.controller';
 
 import { RegisterRoutes} from './routes';
 import * as swaggerUi from 'swagger-ui-express';
+import { RabbitMQ } from './rabbit-receive';
+
 
 
 const corsOptions = {
@@ -19,6 +21,9 @@ app.use(bodyparser.json());
 
 app.use(requestLoggerMiddleware);
 RegisterRoutes(app);
+
+app.use(new RabbitMQ().receiveQueue)
+
 
 try {
     const swaggerDocument = require('../swagger.json');
